@@ -1,0 +1,12 @@
+kind: Module
+name: data
+description: Provides a frontend for the application.
+type: container
+services:
+  - name: data
+    ports:
+      - name: http
+        containerPort: 8080
+    ingresses:
+      - path: /data
+        port: http

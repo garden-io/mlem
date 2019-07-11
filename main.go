@@ -15,7 +15,7 @@ import (
 
 func main() {
 
-	dataset, err := ReadCSV("data.csv")
+	dataset, err := ReadCSV("normalize/data.csv")
 	if err != nil {
 		log.Fatalf("could not read dataset: %v", err)
 	}

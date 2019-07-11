@@ -1,0 +1,16 @@
+kind: Module
+name: console
+description: Provides a frontend for the application.
+type: container
+services:
+  - name: console
+    ports:
+      - name: http
+        containerPort: 8080
+      - name: backend
+        containerPort: 8090
+    ingresses:
+      - path: /
+        port: http
+      - path: /console
+        port: backend
