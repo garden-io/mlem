@@ -17,7 +17,7 @@ import (
 type values struct {
 	MainText string
 	ConnNN string
-	ConnNormalize string
+	ConnData string
 	ConnFrontend string
 	ConnConsole string
 	Progress int
@@ -28,7 +28,7 @@ type values struct {
 var myValues = values{
 	MainText: "Learn Neural Networks With Go - Not Math!\ngithub.com/garden-io/mlem\n@ellenkorbes",
 	ConnNN: "[• neural network](fg:red)", 
-	ConnNormalize: "[• data](fg:red)",
+	ConnData: "[• data](fg:red)",
 	ConnFrontend: "[• frontend](fg:red)",
 	ConnConsole: "[• console](fg:green)",
 	Progress: 0,
@@ -108,7 +108,7 @@ func main() {
 	listData := []string{
 		"",
 		myValues.ConnNN,
-		myValues.ConnNormalize,
+		myValues.ConnData,
 		myValues.ConnFrontend,
 		myValues.ConnConsole,
 	}
@@ -138,7 +138,7 @@ func main() {
 	})()
 
 	lc := widgets.NewPlot()
-	lc.Title = " loss: "
+	lc.Title = "loss: "
 	lc.Data = make([][]float64, 1)
 	lc.Data[0] = sinData
 	lc.SetRect(0, 9, 75, 24)
@@ -168,12 +168,12 @@ func main() {
 		l.Rows = []string{
 			"",
 			myValues.ConnNN,
-			myValues.ConnNormalize,
+			myValues.ConnData,
 			myValues.ConnFrontend,
 			myValues.ConnConsole,
 		}
 		lc.Data[0] = myValues.Loss
-		if len(myValues.Loss) > 0 { lc.Title = fmt.Sprint(" loss: ", myValues.Loss[len(myValues.Loss)-1], " ")}
+		if len(myValues.Loss) > 0 { lc.Title = fmt.Sprint("loss: ", myValues.Loss[len(myValues.Loss)-1])}
 		ui.Render(p, l, g, lc, p2, table1)
 	}
 

@@ -19,18 +19,6 @@ type Values struct {
 	Table    []string
 }
 
-// Receive is the values received from the frontend.
-type Receive struct {
-	Top5     [][]string
-	Dataset  [][]float64
-	MeanKm   float64
-	MeanAge  float64
-	StdKm    float64
-	StdAge   float64
-	MinPrice int
-	MaxPrice int
-}
-
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
@@ -65,8 +53,8 @@ func nn(dataset [][]float64, w http.ResponseWriter, r *http.Request, conn *webso
 
 	// Network!
 	network, err := mlem.NewNetwork(
-		mlem.NewLayer(inputs, 1, mlem.RELU, src),
-		mlem.NewLayer(1, 1, mlem.Identity, src),
+		mlem.NewLayer(inputs, 5, mlem.RELU, src),
+		mlem.NewLayer(5, 1, mlem.Identity, src),
 	)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -74,7 +62,7 @@ func nn(dataset [][]float64, w http.ResponseWriter, r *http.Request, conn *webso
 		return
 	}
 
-	cycles := 260
+	cycles := 500
 	for i := 0; i < cycles; i++ {
 		mserr := mlem.Loss(network, dataset)
 		mlem.Step(network, dataset, learningRate)
@@ -152,13 +140,15 @@ func serve(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 		} else {
-			var unpackhere Receive
-			if err := json.Unmarshal(msg, &unpackhere); err != nil {
+			var dataset struct {
+				Dataset [][]float64
+			}
+			if err := json.Unmarshal(msg, &dataset); err != nil {
 				fmt.Println(err.Error())
 				http.Error(w, err.Error(), http.StatusInternalServerError)
 				return
 			}
-			nn(unpackhere.Dataset, w, r, conn)
+			nn(dataset.Dataset, w, r, conn)
 		}
 	}
 }
