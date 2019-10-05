@@ -9,6 +9,8 @@ import (
 	"time"
 
 	mlem "github.com/garden-io/mlem/libs/3"
+	_ "github.com/garden-io/mlem/libs/2"
+	_ "github.com/garden-io/mlem/libs/1"
 	"github.com/gorilla/websocket"
 )
 
