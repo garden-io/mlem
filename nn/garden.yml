@@ -1,7 +1,6 @@
 kind: Module
-name: nn
-description: The neural network.
 type: container
+name: nn
 services:
   - name: nn
     ports:
@@ -10,3 +9,7 @@ services:
     ingresses:
       - path: /nn
         port: http
+hotReload:
+  sync:
+    - target: /app/
+      source: bin/

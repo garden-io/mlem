@@ -1,0 +1,17 @@
+# kind: Module
+# name: nn
+# description: The neural network.
+# type: container
+# services:
+#   - name: nn
+#     ports:
+#       - name: http
+#         containerPort: 8080
+#     ingresses:
+#       - path: /nn
+#         port: http
+kind: Module
+type: exec
+name: nn-src
+build:
+  command: ["/bin/bash", "hotreload.sh"]
