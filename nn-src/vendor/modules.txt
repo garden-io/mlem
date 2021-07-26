@@ -1,6 +1,8 @@
 # github.com/garden-io/mlem v0.0.0-20190711015836-a60750e4eb8e
+## explicit
 github.com/garden-io/mlem/libs/1
 github.com/garden-io/mlem/libs/2
 github.com/garden-io/mlem/libs/3
-# github.com/gorilla/websocket v1.4.0
+# github.com/gorilla/websocket v1.4.1
+## explicit
 github.com/gorilla/websocket
